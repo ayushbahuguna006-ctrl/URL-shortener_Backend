@@ -1,5 +1,5 @@
 const mongoose=require ('mongoose')
-async function connectTomongoDb(url) {
+function connectTomongoDb(url) {
     return mongoose.connect(url)
 }
 module.exports={
