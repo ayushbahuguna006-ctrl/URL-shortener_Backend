@@ -5,5 +5,5 @@ const URlSchema=new mongoose.Schema({
     VisitHistory:[{timestamp:{type:Number}}],
 },{timestamps:true})
   const url=mongoose.model("url",URlSchema)
-  module.exports=    url
+  module.exports= url
   
