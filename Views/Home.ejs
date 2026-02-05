@@ -1,11 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <style>
+    #para {
+      color: blue;
+      margin-bottom: 10px;
+    }
+  </style>
 </head>
+
 <body>
-    <div><form action="/url"  method="post"><input type="text" name="url" placeholder="Enter full URL here"> <button type="submit">SUBMIT</button></form></div>
+
+  <% if (id) { %>
+    <p>
+      Your Short URL is ⇒
+      <a href="http://localhost:8000/url/<%= id %>" id="para">
+        http://localhost:8000/<%= id %>
+      </a>
+    </p>
+  <% } %>
+
+
+    <% url.forEach(item => { %>
+      <p>
+        <a href="http://localhost:8000/url/<%= item.shortid %>">
+          <%= item.shortid %>
+        </a>
+      </p>
+      <p><%= item.redirectURL %></p>
+      <p>Clicks: <%= item.VisitHistory.length %></p>
+      <hr>
+    <% }) %>
+
+  <form action="/url/home" method="post">
+    <input type="text" name="url" placeholder="Enter full URL here">
+    <button type="submit">SUBMIT</button>
+  </form>
+
 </body>
 </html>
