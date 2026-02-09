@@ -3,10 +3,11 @@ const app=express()
 app.use(express.urlencoded({ extended: false }))   //helps in parsing human readable format 
 app.use(express.json())  //middleware helps in sending json format parsing
 const userroute=require ('./Routes/user')
+const urlroute=require ('./Routes/url')
 app.use('/user',userroute)
 const path=require('path')
 const url=require('./Models/url')
-const router=require ('./Routes/url')
+app.use('/url',urlroute)
 const {connectTomongoDb}=require('./DB-Connection/url')
 const shortid = require('shortid')
 connectTomongoDb('mongodb://127.0.0.1:27017/shorturl').then(()=>{console.log('DB connected')})
@@ -14,8 +15,7 @@ app.set('view engine','ejs')
 app.set('Views',path.resolve('../Views'))
 app.get("/url/home",async(req,res)=>{
       const allurl = await url.find({});  
-  res.render("home", {
-    id: null,                          
+  res.render("home", {                        
     url: allurl                     
   });
 })
