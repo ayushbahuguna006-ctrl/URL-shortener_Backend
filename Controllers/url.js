@@ -10,7 +10,9 @@ async function handleGenerateNewShortUrl(req,res) {
         VisitHistory:[],
         createdby:req.user._id
     })
-    const allurl=await url.find({})
+    const allurl = await url.find({ createdby: req.user._id })
+    console.log("Logged-in user:", req.user._id);
+
     return res.render('Home',{id:shortID,url:allurl})
 }
 async function handleGetAnalysis(req,res) {

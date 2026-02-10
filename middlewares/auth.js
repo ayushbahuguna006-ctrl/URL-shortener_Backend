@@ -3,7 +3,7 @@ async function restricttologgedinuseronly(req,res,next){
     const userUid=req.cookies.uid
     if(!userUid) return res.redirect('/user/login')
         const user=getuser(userUid)
-    if(!userUid)  return res.redirect('/user/login')
+    if(!user)  return res.redirect('/user/login')
         req.user=user
     next()
 }
