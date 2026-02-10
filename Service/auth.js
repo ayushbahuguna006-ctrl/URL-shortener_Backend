@@ -9,5 +9,5 @@ function getuser(id){
 }
 module.exports={
     setuser,
-    getuser
+    getuser,
 }
