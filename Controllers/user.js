@@ -1,5 +1,5 @@
 const {v4:uuidv4}=require ('uuid')
-const {setuser}=require ('../Service/auth')
+const {setUser}=require ('../Service/auth')
 const User=require('../Models/user')
 async function handleUserSignUp(req,res) {
     const {name,password,email}=req.body
@@ -18,9 +18,19 @@ async function handleUserLogin(req,res) {
         error:"invalid username or password"
     })
    }
-  const sessionid=uuidv4();
-  setuser(sessionid,user)
-  res.cookie('uid',sessionid)
+//    stateful authentication.............
+
+
+//   const sessionid=uuidv4();
+//   setuser(sessionid,user)
+//   res.cookie('uid',sessionid)
+
+
+//stateless authentication.................
+
+
+const token=setUser(user)
+res.cookie('uid',token)
    return res.redirect("/url/home/")
 }
 module.exports={
