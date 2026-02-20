@@ -24,7 +24,7 @@ app.get("/url/home",async(req,res)=>{
   });
 })
 app.get('/admin/url',restrictto(['ADMIN']),async(req,res)=>{    //admin routes added...
-     const allurl = await url.find({});  
+     const allurl = await url.find({});       //all database url access to admin given
   res.render("home", {                        
      url: allurl                      
   });
