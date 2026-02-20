@@ -1,16 +1,18 @@
 const { getUser }=require('../Service/auth')
-async function restricttologgedinuseronly(req,res,next){
-    const userUid=req.cookies.uid
-    if(!userUid) return res.redirect('/user/login')
-        const user=getUser(userUid)
-    if(!user)  return res.redirect('/user/login')
-        req.user=user
-    next()
+function checkforauthentication(req,res,next){
+    const tokencookie=req.cookies.token;
+    req.user=null
+    if(!tokencookie) return next()
+        const token=tokencookie
+    const user=getUser(token)
+    req.user=user
+    return next()
 }
-async function checkauth(req,res,next){
-    const userUid=req.cookies.uid
-     const user=getUser(userUid)
-      req.user=user
-    next()
+function restrictto(roles=[]){
+    return function(req,res,next){
+        if(!req.user) return res.redirect('/user/login')
+        if(!roles.includes(req.user.role)) return res.end('unauthorised')
+        return next()
+    }
 }
-module.exports={restricttologgedinuseronly,checkauth}
+module.exports={checkforauthentication,restrictto}
