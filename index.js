@@ -23,7 +23,7 @@ app.get("/url/home",async(req,res)=>{
     url: allurl                     
   });
 })
-app.get('/admin/url',restrictto(['ADMIN']),async(req,res)=>{    //admin routes added
+app.get('/admin/url',restrictto(['ADMIN']),async(req,res)=>{    //admin routes added...
      const allurl = await url.find({});  
   res.render("home", {                        
      url: allurl                      
