@@ -11,7 +11,7 @@ app.use('/user',userroute)
 app.use(checkforauthentication)
 app.use('/url',restrictto(['NORMAL','ADMIN']),urlroute)
 const path=require('path')
-const url=require('./Models/url')
+const url=require('./Models/url')   
 const {connectTomongoDb}=require('./DB-Connection/url')
 const shortid = require('shortid')
 connectTomongoDb('mongodb://127.0.0.1:27017/shorturl').then(()=>{console.log('DB connected')})
@@ -23,7 +23,7 @@ app.get("/url/home",async(req,res)=>{
     url: allurl                     
   });
 })
-app.get('/admin/url',restrictto(['ADMIN']),async(req,res)=>{
+app.get('/admin/url',restrictto(['ADMIN']),async(req,res)=>{    //admin routes added
      const allurl = await url.find({});  
   res.render("home", {                        
      url: allurl                      
