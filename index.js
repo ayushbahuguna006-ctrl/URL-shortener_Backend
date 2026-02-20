@@ -24,7 +24,7 @@ app.get("/url/home",async(req,res)=>{
   });
 })
 app.get('/admin/url',restrictto(['ADMIN']),async(req,res)=>{
-     const allurl = await url.find({createdby:req.user._id});  
+     const allurl = await url.find({});  
   res.render("home", {                        
     url: allurl                     
   });
