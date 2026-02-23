@@ -1,6 +1,8 @@
+require('dotenv').config()
 const express=require ('express')
 const cookieparser=require ('cookie-parser')
 const app=express()
+const PORT=process.env.PORT || 8000
 app.use(express.urlencoded({ extended: false }))   //helps in parsing human readable format 
 app.use(express.json())  //middleware helps in sending json format parsing
 const userroute=require ('./Routes/user')
@@ -14,7 +16,7 @@ const path=require('path')
 const url=require('./Models/url')   
 const {connectTomongoDb}=require('./DB-Connection/url')
 const shortid = require('shortid')
-connectTomongoDb('mongodb://127.0.0.1:27017/shorturl').then(()=>{console.log('DB connected')})
+connectTomongoDb(process.env.MONGO_URL).then(()=>{console.log('DB connected')})
 app.set('view engine','ejs')
 app.set('Views',path.resolve('../Views')) 
 app.get("/url/home",async(req,res)=>{
@@ -53,4 +55,4 @@ app.get("/url/:shortid",async(req,res)=>{
 
 
 
-app.listen(8000,()=>{console.log("server started")})
+app.listen(PORT,()=>{console.log("server started")})
