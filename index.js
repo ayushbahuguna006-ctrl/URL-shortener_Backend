@@ -18,7 +18,10 @@ const {connectTomongoDb}=require('./DB-Connection/url')
 const shortid = require('shortid')
 connectTomongoDb(process.env.MONGO_URL).then(()=>{console.log('DB connected')})
 app.set('view engine','ejs')
-app.set('Views',path.resolve('../Views')) 
+app.set('views', path.join(__dirname, 'views'));
+app.get("/", (req, res) => {
+    res.redirect("/user/signup");
+});
 app.get("/url/home",async(req,res)=>{
       const allurl = await url.find({createdby:req.user._id});  
   res.render("home", {                        

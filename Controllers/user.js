@@ -8,7 +8,7 @@ async function handleUserSignUp(req,res) {
         email,
         password
     })
-    return res.redirect("/url/home/")
+    return res.redirect("/user/login")
 }
 async function handleUserLogin(req,res) {
    const {email,password}=req.body;
